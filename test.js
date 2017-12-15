@@ -39,7 +39,6 @@ test('error - missing stack', t => {
 
 test('number', t => {
 	const f = m(5);
-	console.log(f.stack);
 	t.is(f.name, 'NonError');
 	t.is(f.message, '5');
 	t.regex(f.stack, / at /);
