@@ -14,19 +14,19 @@ module.exports = input => {
 		return new NonError(input);
 	}
 
-	const err = input;
+	const error = input;
 
-	if (!err.name) {
-		err.name = (err.constructor && err.constructor.name) || 'Error';
+	if (!error.name) {
+		error.name = (error.constructor && error.constructor.name) || 'Error';
 	}
 
-	if (!err.message) {
-		err.message = '<No error message>';
+	if (!error.message) {
+		error.message = '<No error message>';
 	}
 
-	if (!err.stack) {
-		err.stack = (new Error(err.message)).stack.replace(/\n {4}at /, '\n<Original stack missing>$&');
+	if (!error.stack) {
+		error.stack = (new Error(error.message)).stack.replace(/\n {4}at /, '\n<Original stack missing>$&');
 	}
 
-	return err;
+	return error;
 };
