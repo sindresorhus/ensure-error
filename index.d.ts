@@ -7,7 +7,7 @@ declare namespace ensureError {
 /**
 Ensures a value is a valid error by making it one if not.
 
-If `input` is an `Error`, any missing `Error` properties will be added.<br>
+If `input` is an `Error`, any missing `Error` properties will be added.
 If it's not an `Error`, `input` is converted to an `Error`.
 
 @example
@@ -27,8 +27,6 @@ console.log(ensureError(10));
 //=> [NonError: 10]
 ```
 */
-declare function ensureError<T>(
-	input: T
-): T extends Error ? T : ensureError.NonError;
+declare function ensureError<T>(input: T): T extends Error ? T : ensureError.NonError;
 
 export = ensureError;
