@@ -47,7 +47,7 @@ If it's not an `Error`, `input` is converted to an `Error`.
 
 #### input
 
-Type: `any`
+Type: `unknown`
 
 
 ## License
