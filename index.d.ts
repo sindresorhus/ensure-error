@@ -4,6 +4,10 @@ declare namespace ensureError {
 	}
 }
 
+// IfAny<T, ThenType, ElseType> resolves to ThenType if T is `any` and resolves to ElseType otherwise
+// https://stackoverflow.com/a/49928360/4135063
+type IfAny<T, ThenType, ElseType> = 0 extends (1 & T) ? ThenType : ElseType;
+
 /**
 Ensures a value is a valid error by making it one if not.
 
@@ -27,6 +31,6 @@ console.log(ensureError(10));
 //=> [NonError: 10]
 ```
 */
-declare function ensureError<T>(input: T): T extends Error ? T : ensureError.NonError;
+declare function ensureError<T>(input: T): IfAny<T, Error, T extends Error ? T : ensureError.NonError>;
 
 export = ensureError;
