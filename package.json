@@ -4,13 +4,14 @@
 	"description": "Ensures a value is a valid error by making it one if not",
 	"license": "MIT",
 	"repository": "sindresorhus/ensure-error",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"url": "https://sindresorhus.com"
 	},
 	"engines": {
-		"node": ">=8"
+		"node": ">=10"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -36,6 +37,6 @@
 	"devDependencies": {
 		"ava": "^1.4.1",
 		"tsd": "^0.11.0",
-		"xo": "^0.24.0"
+		"xo": "^0.30.0"
 	}
 }
