@@ -9,7 +9,7 @@ declare namespace ensureError {
 // https://stackoverflow.com/a/49928360/4135063
 type IfAny<T, ThenType, ElseType> = 0 extends (1 & T) ? ThenType : ElseType;
 
-type WithStack<T> = T & { stack: string; };
+type ErrorWithStack<T> = T & {stack: string};
 
 /**
 Ensures a value is a valid error by making it one if not.
