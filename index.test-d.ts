@@ -1,7 +1,7 @@
 import {expectAssignable, expectType} from 'tsd';
 import ensureError = require('.');
 
-type WithStack<T> = T & { stack: string; };
+type WithStack<T> = T & {stack: string};
 
 const error = new TypeError('🦄');
 
