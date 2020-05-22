@@ -8,8 +8,8 @@ const error = new TypeError('🦄');
 expectAssignable<Error>(ensureError(10 as any));
 expectAssignable<TypeError>(ensureError(error));
 
-expectType<WithStack<Error>>(ensureError(10 as any));
-expectType<WithStack<TypeError>>(ensureError(error));
+expectType<ErrorWithStack<Error>>(ensureError(10 as any));
+expectType<ErrorWithStack<TypeError>>(ensureError(error));
 expectType<ensureError.NonError>(ensureError(10));
 
 // Ensure stack property

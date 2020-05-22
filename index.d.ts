@@ -34,6 +34,6 @@ console.log(ensureError(10));
 //=> [NonError: 10]
 ```
 */
-declare function ensureError<T>(input: T): IfAny<T, WithStack<Error>, T extends Error ? WithStack<T> : ensureError.NonError>;
+declare function ensureError<T>(input: T): IfAny<T, ErrorWithStack<Error>, T extends Error ? ErrorWithStack<T> : ensureError.NonError>;
 
 export = ensureError;
