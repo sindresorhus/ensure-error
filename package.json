@@ -1,6 +1,6 @@
 {
 	"name": "ensure-error",
-	"version": "3.0.1",
+	"version": "4.0.0",
 	"description": "Ensures a value is a valid error by making it one if not",
 	"license": "MIT",
 	"repository": "sindresorhus/ensure-error",
