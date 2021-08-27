@@ -1,5 +1,5 @@
 import {expectAssignable, expectType} from 'tsd';
-import ensureError = require('.');
+import ensureError, {NonError} from './index.js';
 
 type ErrorWithStack<T> = T & {stack: string};
 
@@ -10,7 +10,7 @@ expectAssignable<TypeError>(ensureError(error));
 
 expectType<ErrorWithStack<Error>>(ensureError(10 as any));
 expectType<ErrorWithStack<TypeError>>(ensureError(error));
-expectType<ensureError.NonError>(ensureError(10));
+expectType<NonError>(ensureError(10));
 
 // Ensure stack property
 expectType<string>(ensureError(10).stack);

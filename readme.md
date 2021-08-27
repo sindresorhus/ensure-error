@@ -15,7 +15,7 @@ $ npm install ensure-error
 ## Usage
 
 ```js
-const ensureError = require('ensure-error');
+import ensureError from 'ensure-error';
 
 const error = new TypeError('🦄');
 error.name = '';
@@ -28,7 +28,7 @@ console.log(ensureError(error).name);
 ```
 
 ```js
-const ensureError = require('ensure-error');
+import ensureError from 'ensure-error';
 
 console.log(ensureError(10));
 //=> [NonError: 10]

@@ -1,8 +1,6 @@
-declare namespace ensureError {
-	interface NonError extends Error {
-		name: 'NonError';
-		stack: string;
-	}
+export interface NonError extends Error {
+	name: 'NonError';
+	stack: string;
 }
 
 // IfAny<T, ThenType, ElseType> resolves to ThenType if T is `any` and resolves to ElseType otherwise
@@ -19,7 +17,7 @@ If it's not an `Error`, `input` is converted to an `Error`.
 
 @example
 ```
-import ensureError = require('ensure-error');
+import ensureError from 'ensure-error';
 
 const error = new TypeError('🦄');
 error.name = '';
@@ -34,6 +32,4 @@ console.log(ensureError(10));
 //=> [NonError: 10]
 ```
 */
-declare function ensureError<T>(input: T): IfAny<T, ErrorWithStack<Error>, T extends Error ? ErrorWithStack<T> : ensureError.NonError>;
-
-export = ensureError;
+export default function ensureError<T>(input: T): IfAny<T, ErrorWithStack<Error>, T extends Error ? ErrorWithStack<T> : NonError>;

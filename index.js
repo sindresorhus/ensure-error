@@ -1,21 +1,20 @@
-'use strict';
-const util = require('util');
+import {inspect} from 'node:util';
 
 class NonError extends Error {
 	constructor(message) {
-		super(util.inspect(message));
+		super(inspect(message));
 
 		Object.defineProperty(this, 'name', {
 			value: 'NonError',
 			configurable: true,
-			writable: true
+			writable: true,
 		});
 
 		Error.captureStackTrace(this, NonError);
 	}
 }
 
-module.exports = input => {
+export default function ensureError(input) {
 	if (!(input instanceof Error)) {
 		return new NonError(input);
 	}
@@ -26,7 +25,7 @@ module.exports = input => {
 		Object.defineProperty(error, 'name', {
 			value: (error.constructor && error.constructor.name) || 'Error',
 			configurable: true,
-			writable: true
+			writable: true,
 		});
 	}
 
@@ -34,7 +33,7 @@ module.exports = input => {
 		Object.defineProperty(error, 'message', {
 			value: '<No error message>',
 			configurable: true,
-			writable: true
+			writable: true,
 		});
 	}
 
@@ -42,9 +41,9 @@ module.exports = input => {
 		Object.defineProperty(error, 'stack', {
 			value: (new Error(error.message)).stack.replace(/\n {4}at /, '\n<Original stack missing>$&'),
 			configurable: true,
-			writable: true
+			writable: true,
 		});
 	}
 
 	return error;
-};
+}

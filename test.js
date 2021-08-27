@@ -1,5 +1,5 @@
 import test from 'ava';
-import ensureError from '.';
+import ensureError from './index.js';
 
 test('error', t => {
 	const error = new Error('🦄');
@@ -34,7 +34,7 @@ test('error - missing stack', t => {
 	const result = ensureError(error);
 	t.is(result.name, 'Error');
 	t.is(result.message, '🦄');
-	t.true(result.stack.startsWith('Error: 🦄\n<Original stack missing>\n    at '), result.stack);
+	t.true(result.stack.startsWith('Error: 🦄\n<Original stack missing>\n    at '), result.stack); // eslint-disable-line ava/assertion-arguments
 });
 
 test('number', t => {
