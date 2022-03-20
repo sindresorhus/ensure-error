@@ -8,8 +8,8 @@ Can be useful when you don't control all the places an error can be thrown or re
 
 ## Install
 
-```
-$ npm install ensure-error
+```sh
+npm install ensure-error
 ```
 
 ## Usage

@@ -1,16 +1,10 @@
 import {inspect} from 'node:util';
 
 class NonError extends Error {
+	name = 'NonError';
+
 	constructor(message) {
 		super(inspect(message));
-
-		Object.defineProperty(this, 'name', {
-			value: 'NonError',
-			configurable: true,
-			writable: true,
-		});
-
-		Error.captureStackTrace(this, NonError);
 	}
 }
 
