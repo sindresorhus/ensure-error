@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface NonError extends Error {
 	name: 'NonError';
 	stack: string;

@@ -37,8 +37,11 @@
 		"convert"
 	],
 	"devDependencies": {
-		"ava": "^4.1.0",
-		"tsd": "^0.19.1",
-		"xo": "^0.48.0"
+		"ava": "^6.4.1",
+		"tsd": "^0.33.0",
+		"xo": "^1.2.2"
+	},
+	"dependencies": {
+		"object-inspect": "^1.13.4"
 	}
 }
