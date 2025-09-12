@@ -8,36 +8,47 @@ class NonError extends Error {
 	}
 }
 
-export default function ensureError(input) {
+function ensureErrorInternal(input, seen) {
 	if (!(input instanceof Error)) {
 		return new NonError(input);
 	}
 
-	const error = input;
-
-	if (!error.name) {
-		Object.defineProperty(error, 'name', {
-			value: (error.constructor && error.constructor.name) || 'Error',
-			configurable: true,
-			writable: true,
-		});
+	// Prevent infinite recursion with circular references
+	if (seen.has(input)) {
+		return input;
 	}
 
-	if (!error.message) {
-		Object.defineProperty(error, 'message', {
-			value: '<No error message>',
-			configurable: true,
-			writable: true,
-		});
+	seen.add(input);
+
+	// Helper to ensure properties exist with correct descriptors
+	const ensureProperty = (property, defaultValue) => {
+		if (!input[property]) {
+			Object.defineProperty(input, property, {
+				value: defaultValue,
+				configurable: true,
+				writable: true,
+				enumerable: false,
+			});
+		}
+	};
+
+	ensureProperty('name', input.constructor?.name || 'Error');
+	ensureProperty('message', '<No error message>');
+	ensureProperty('stack', (new Error(input.message)).stack.replace(/\n {4}at /, '\n<Original stack missing>$&'));
+
+	// Recursively ensure cause is also a proper error
+	if (input.cause !== undefined && input.cause !== null) {
+		input.cause = ensureErrorInternal(input.cause, seen);
 	}
 
-	if (!error.stack) {
-		Object.defineProperty(error, 'stack', {
-			value: (new Error(error.message)).stack.replace(/\n {4}at /, '\n<Original stack missing>$&'),
-			configurable: true,
-			writable: true,
-		});
+	// Recursively ensure AggregateError.errors are also proper errors
+	if (input instanceof AggregateError && Array.isArray(input.errors)) {
+		input.errors = input.errors.map(error => ensureErrorInternal(error, seen));
 	}
 
-	return error;
+	return input;
+}
+
+export default function ensureError(input) {
+	return ensureErrorInternal(input, new WeakSet());
 }
