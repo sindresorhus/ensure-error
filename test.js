@@ -54,7 +54,7 @@ test('string', t => {
 test('object', t => {
 	const result = ensureError({foo: true});
 	t.is(result.name, 'NonError');
-	t.is(result.message, '{ foo: true }');
+	t.is(result.message, '{"foo":true}');
 	t.regex(result.stack, / at /);
 });
 

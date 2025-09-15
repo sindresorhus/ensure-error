@@ -1,7 +1,7 @@
-export interface NonError extends Error {
+export type NonError = {
 	name: 'NonError';
 	stack: string;
-}
+} & Error;
 
 // IfAny<T, ThenType, ElseType> resolves to ThenType if T is `any` and resolves to ElseType otherwise
 // https://stackoverflow.com/a/49928360/4135063
@@ -12,8 +12,7 @@ type ErrorWithStack<T> = T & {stack: string};
 // Transform individual items (for cause or array elements)
 type TransformItem<T> = T extends Error
 	? ErrorWithStack<T>
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	: T extends null | undefined
+	: T extends undefined
 		? T
 		: NonError;
 

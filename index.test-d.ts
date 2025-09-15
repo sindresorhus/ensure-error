@@ -1,5 +1,5 @@
 import {expectAssignable, expectType} from 'tsd';
-import ensureError, {NonError} from './index.js';
+import ensureError, {type NonError} from './index.js';
 
 type ErrorWithStack<T> = T & {stack: string};
 

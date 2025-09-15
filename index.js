@@ -1,10 +1,40 @@
-import {inspect} from 'node:util';
+function toErrorMessage(value) {
+	if (value === undefined) {
+		return 'undefined';
+	}
+
+	if (typeof value === 'string') {
+		return `'${value}'`;
+	}
+
+	if (typeof value === 'bigint') {
+		return `${value}n`;
+	}
+
+	if (typeof value === 'symbol') {
+		return value.toString();
+	}
+
+	if (typeof value === 'function') {
+		return `[Function${value.name ? ` ${value.name}` : ' (anonymous)'}]`;
+	}
+
+	try {
+		return JSON.stringify(value);
+	} catch {
+		try {
+			return String(value);
+		} catch {
+			return '<Unserializable value>';
+		}
+	}
+}
 
 class NonError extends Error {
 	name = 'NonError';
 
 	constructor(message) {
-		super(inspect(message));
+		super(toErrorMessage(message));
 	}
 }
 
